@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from "react";
 import axios from 'axios';
-import {Link} from "@reach/router";
+import {Link, navigate} from "@reach/router";
 
 const OneProduct = (props) => {
     const [product, setProduct] = useState({});
@@ -17,15 +17,33 @@ const OneProduct = (props) => {
             })
     }, [id]);
 
+
+    const deleteProduct = (id) => {
+        axios.post(`http://localhost:8000/api/products/${id}`)
+            .then(res=>{
+                console.log(res.data);
+                navigate("/");
+            })
+            .catch(err=>console.log(err));
+    }
     return (
-        <div>
-            <h2>OneProduct component</h2>
-            <h3>Title: {product.title}</h3>
-            <h4>Price: {product.price}</h4>
-            <h4>Description: {product.description}</h4>
-            <h5>
-                <Link to={"/"}>Home</Link>
-            </h5>
+        <div className={"container mx-auto mt-5"}>
+            <div className={ "bg-slate-200 rounded p-4"}>
+                {/*<h2>OneProduct component</h2>*/}
+                <div className={"font-bold"}>
+                    <h3 className={"text-2xl"}>Title: {product.title}</h3>
+                    <h4 className={"text-lg"}>Price: {product.price}</h4>
+                    <h4 className={"text-lg"}>Description: {product.description}</h4>
+                    <h2>Id: {id}</h2>
+                </div>
+            </div>
+            <div className={"mt-5 flex gap-3"}>
+
+                    <Link to={"/"} className={"bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 rounded px-3"}>Home</Link>
+                    <Link to={`/products/edit/${id}`} className={"bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 rounded px-3"}>Edit</Link>
+                <button type={"submit"} onClick={(e)=>{deleteProduct(id)}} className={"bg-red-500 hover:bg-red-700 text-white font-bold py-1 rounded px-3"}>Delete</button>
+
+            </div>
         </div>
     )
 };

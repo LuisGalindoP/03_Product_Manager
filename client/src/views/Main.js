@@ -5,6 +5,7 @@ import NewProduct from "../components/NewProduct";
 
 
 const Main = (props) => {
+
     const [products, setProducts] = useState([]);
 
     return  (
@@ -16,6 +17,7 @@ const Main = (props) => {
             <AllProducts
                 products = {products}
                 setProducts = {setProducts}
+
             />
         </div>
     )

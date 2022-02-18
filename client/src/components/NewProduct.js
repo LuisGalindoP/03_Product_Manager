@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from "react";
-import {Link, navigate} from "@reach/router";
+
 import axios from 'axios';
 
 const NewProduct = (props) => {
@@ -30,33 +30,37 @@ const NewProduct = (props) => {
 
 
     return (
-        <div>
-            <h2>NewProduct component</h2>
-            <h3>{products.length}</h3>
+        <div className={"container mx-auto mt-5"}>
+            <h1 className={"font-bold text-xl mb-3"}>Add a new product</h1>
+
             <form onSubmit={formHandler}>
                 <div>
-                    <label>Title:</label>
+                    <label className={"block text-gray-600 text-sm font-bold"}>TITLE</label>
                     <input
+                        className={"indent-2 bg-gray-200 text-gray-700 border slate-100 text-m rounded py-1 w-1/3"}
                         type="text"
                         value={title}
                         onChange={(e)=>setTitle(e.target.value)}
                     />
                 </div>
                 <div>
-                    <label>Price:</label>
+                    <label className={"block text-gray-600 text-sm font-bold mt-3"}>PRICE</label>
                     <input
+                        className={"indent-2 bg-gray-200 text-gray-700 border slate-100 text-m rounded py-1 w-1/3"}
                         type="number"
                         value={price}
                         onChange={(e)=>setPrice(e.target.value)}
                     />
                 </div>
                 <div>
-                    <label>Description:</label>
+                    <label className={"block text-gray-600 text-sm font-bold mt-3"}>DESCRIPTION</label>
                     <textarea rows={"5"} cols={"20"}
+                              className={"indent-2 bg-gray-200 text-gray-700 border slate-100 text-m rounded py-1 w-1/3"}
+                              value={description}
                         onChange={(e)=>setDescription(e.target.value)}
                     />
                 </div>
-                <button type={"submit"}>Add product</button>
+                <button type={"submit"} className={"bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded mt-2"}>Add product</button>
             </form>
             <h5>
                 {/*<Link to={"/"}>Home</Link>*/}
