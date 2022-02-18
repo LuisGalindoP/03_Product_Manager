@@ -6,6 +6,7 @@ const NewProduct = (props) => {
     const [title, setTitle] = useState("");
     const [price, setPrice] = useState("");
     const [description, setDescription] = useState("");
+    const {products, setProducts} = props;
 
     const formHandler = (e)=> {
         e.preventDefault();
@@ -15,18 +16,23 @@ const NewProduct = (props) => {
             description
         })
             .then((res)=> {
-                console.log(res.data);
-                navigate("/")
+                // console.log("This is res data from newProduct", + res.data);
+                setProducts([...products, res.data]);
+                // navigate("/")
             })
             .catch((err)=>{
                 console.log(err);
             })
+        setTitle("");
+        setPrice("");
+        setDescription("");
     }
 
 
     return (
         <div>
             <h2>NewProduct component</h2>
+            <h3>{products.length}</h3>
             <form onSubmit={formHandler}>
                 <div>
                     <label>Title:</label>
@@ -53,7 +59,7 @@ const NewProduct = (props) => {
                 <button type={"submit"}>Add product</button>
             </form>
             <h5>
-                <Link to={"/"}>Home</Link>
+                {/*<Link to={"/"}>Home</Link>*/}
             </h5>
         </div>
     )

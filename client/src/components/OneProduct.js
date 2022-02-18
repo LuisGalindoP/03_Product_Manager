@@ -9,7 +9,7 @@ const OneProduct = (props) => {
     useEffect(()=> {
         axios.get(`http://localhost:8000/api/products/${id}`)
             .then((res)=>{
-                console.log(`This is the res.data ${res.data}`);
+                // console.log(`This is the res.data ${res.data}`);
                 setProduct((res.data));
             })
             .catch((err)=>{

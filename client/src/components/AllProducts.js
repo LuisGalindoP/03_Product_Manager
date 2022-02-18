@@ -3,24 +3,24 @@ import axios from 'axios';
 import {Link} from '@reach/router';
 
 const AllProducts = (props) => {
-    const [allProducts, setAllProducts] = useState([]);
+    const {products, setProducts} = props;
 
     useEffect(()=> {
         axios.get("http://localhost:8000/api/products")
             .then((res)=>{
-                console.log(res.data);
-                setAllProducts(res.data);
+                // console.log("This is the res.data from AllProducts",res.data);
+                setProducts(res.data);
             })
             .catch((err)=>{
-                console.log(err)
+                console.log("Error from AllProductsd", err)
             })
     },[]);
 
     return (
         <div>
             <h2>AllProducts component</h2>
-            <h3><Link to={"/products/new"}>Add a new product</Link></h3>
-            {allProducts.map((product, index)=>{
+            <h3>{products.length}</h3>
+            {products.map((product, index)=>{
                 return (
                     <div key={index}>
                         <Link to={`/products/${product._id}`}>
