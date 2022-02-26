@@ -1,6 +1,7 @@
 import React,{useEffect, useState} from "react";
 import axios from 'axios';
 import {Link, navigate} from "@reach/router";
+import DeleteButton from '../components/deleteButton'
 
 const OneProduct = (props) => {
     const [product, setProduct] = useState({});
@@ -17,15 +18,6 @@ const OneProduct = (props) => {
             })
     }, [id]);
 
-
-    const deleteProduct = (id) => {
-        axios.post(`http://localhost:8000/api/products/${id}`)
-            .then(res=>{
-                console.log(res.data);
-                navigate("/");
-            })
-            .catch(err=>console.log(err));
-    }
     return (
         <div className={"container mx-auto mt-5"}>
             <div className={ "bg-slate-200 rounded p-4"}>
@@ -41,8 +33,11 @@ const OneProduct = (props) => {
 
                     <Link to={"/"} className={"bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 rounded px-3"}>Home</Link>
                     <Link to={`/products/edit/${id}`} className={"bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 rounded px-3"}>Edit</Link>
-                <button type={"submit"} onClick={(e)=>{deleteProduct(id)}} className={"bg-red-500 hover:bg-red-700 text-white font-bold py-1 rounded px-3"}>Delete</button>
 
+                <DeleteButton
+                    productId = {id}
+                    successCallBack = {()=>navigate('/')}
+                />
             </div>
         </div>
     )

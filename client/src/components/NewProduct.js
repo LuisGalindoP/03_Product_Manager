@@ -6,32 +6,16 @@ const NewProduct = (props) => {
     const [title, setTitle] = useState("");
     const [price, setPrice] = useState("");
     const [description, setDescription] = useState("");
-    const {products, setProducts} = props;
+    const {onSubmitProp, initialTitle, initialPrice, initialDescription} = props;
 
     const formHandler = (e)=> {
         e.preventDefault();
-        axios.post("http://localhost:8000/api/products", {
-            title,
-            price,
-            description
-        })
-            .then((res)=> {
-                // console.log("This is res data from newProduct", + res.data);
-                setProducts([...products, res.data]);
-                // navigate("/")
-            })
-            .catch((err)=>{
-                console.log(err);
-            })
-        setTitle("");
-        setPrice("");
-        setDescription("");
-    }
+        onSubmitProp({title, price, description});
+    };
 
 
     return (
-        <div className={"container mx-auto mt-5"}>
-            <h1 className={"font-bold text-xl mb-3"}>Add a new product</h1>
+        <div className={"container mx-auto my-5"}>
 
             <form onSubmit={formHandler}>
                 <div>
@@ -60,7 +44,7 @@ const NewProduct = (props) => {
                         onChange={(e)=>setDescription(e.target.value)}
                     />
                 </div>
-                <button type={"submit"} className={"bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded mt-2"}>Add product</button>
+                <button type={"submit"} className={"bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded mt-2"}>Submit</button>
             </form>
             <h5>
                 {/*<Link to={"/"}>Home</Link>*/}
